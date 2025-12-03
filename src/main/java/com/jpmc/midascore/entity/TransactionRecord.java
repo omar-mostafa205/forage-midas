@@ -1,30 +1,59 @@
 package com.jpmc.midascore.entity;
 
 import jakarta.persistence.*;
-import org.apache.catalina.User;
 
 @Entity
 public class TransactionRecord {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue()
+    private long id;
 
     @ManyToOne
-    private User sender;
+    private UserRecord sender;
 
     @ManyToOne
-    private User recipient;
+    private UserRecord recipient;
 
-    private Double amount;
+    @Column(nullable = false)
+    private float amount;
 
-    private Long timestamp;
+    @Column(nullable = false)
+    private float incentive;
 
-    public TransactionRecord() {}
-
-    public TransactionRecord(UserRecord sender, UserRecord recipient, Double amount, Long timestamp) {
-        this.amount = amount;
-        this.timestamp = timestamp;
+    protected TransactionRecord() {
     }
-    
+
+    public TransactionRecord(UserRecord sender, UserRecord recipient, float amount, float incentive) {
+        this.sender = sender;
+        this.recipient = recipient;
+        this.amount = amount;
+        this.incentive = incentive;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public UserRecord getSender() {
+        return sender;
+    }
+
+    public UserRecord getRecipient() {
+        return recipient;
+    }
+
+    public float getAmount() {
+        return amount;
+    }
+
+    public float getIncentive() {
+        return incentive;
+    }
+
+    @Override
+    public String toString() {
+        return "TransactionRecord {sender=" + sender.toString() + ", recipient=" + recipient.toString() + ", amount=" + amount +
+                ", incentive=" + incentive + "}";
+    }
 }

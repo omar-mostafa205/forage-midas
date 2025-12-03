@@ -45,4 +45,12 @@ public class Transaction {
     public String toString() {
         return "Transaction {senderId=" + senderId + ", recipientId=" + recipientId + ", amount=" + amount + "}";
     }
+
+    public float getIncentive() {
+        return amount;
+    }
+
+    public void setIncentive(float amount) {
+        this.amount = amount;
+    }
 }
